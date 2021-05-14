@@ -3,7 +3,7 @@ package medieval_Mayhem;
 import javax.swing.JFrame;
 
 public class Medieval_Mayhem {
-	public static int WIDTH = 1500;
+	public static int WIDTH = 1200;
 	public static int HEIGHT = 800;
 	JFrame frame;	
 	GamePanel panel;

@@ -34,9 +34,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 		EndFont = new Font("Arial", Font.PLAIN, 48);
 		frameDraw = new Timer(1000/60,this);
 		frameDraw.start();
-		if (needImage) {
-			loadImage ("Map.jpg");
-		}
+			loadImage ("map.jpg");
+		
 	}
 	@Override
 	public void paintComponent(Graphics g){
@@ -108,8 +107,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 			 try {
 				 image = ImageIO.read(this.getClass().getResourceAsStream(imageFile));
 				 gotImage = true;
+				 System.out.println("Its working");
 			 } catch (Exception e) {
-
+				 e.printStackTrace();
 			 }
 			 needImage = false;
 		 }
