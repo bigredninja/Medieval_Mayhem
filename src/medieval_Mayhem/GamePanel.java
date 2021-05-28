@@ -7,13 +7,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-public class GamePanel extends JPanel implements ActionListener, KeyListener{
+public class GamePanel extends JPanel implements ActionListener, KeyListener, MouseListener{
 	public static BufferedImage image;
 	public static boolean needImage = true;
 	public static boolean gotImage = false;
@@ -64,6 +66,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 				g.setColor(Color.BLACK);
 				g.fillRect(0, 0, Medieval_Mayhem.WIDTH, Medieval_Mayhem.HEIGHT);
 			}
+		 g.setColor(Color.RED);
+			g.fillRect(400, 375, 50, 50);
 	 }
 	 void drawGameState(Graphics g) {  }
 	 void drawEndState(Graphics g)  {  }
@@ -138,4 +142,39 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 		 // TODO Auto-generated method stub
 
 	 }
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		if (mapClicked(e,400,450,375,425)) {
+			System.out.println("clicked");
+		}
+	}
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	boolean mapClicked(MouseEvent e,int xmin,int xmax,int ymin,int ymax) {
+		System.out.println(e.getX() + " " + e.getY());
+		if (e.getX() >= xmin + 7 && e.getX() <= xmax + 7 && e.getY() >= ymin + 30 && e.getY() <= ymax + 30) {
+			return true; 
+		}
+		return false;
+		
+	}
 }

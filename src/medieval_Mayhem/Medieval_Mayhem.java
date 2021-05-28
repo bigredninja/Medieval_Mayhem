@@ -17,6 +17,7 @@ public class Medieval_Mayhem {
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.addKeyListener(panel);
+		frame.addMouseListener(panel);
 	}
 	
 	public static void main(String[] args) {
