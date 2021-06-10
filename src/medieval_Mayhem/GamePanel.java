@@ -31,12 +31,20 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	final int STAGE2Y = 410;
 	final int STAGE3X = 519;
 	final int STAGE3Y = 260;
+	final int KNIGHTWIDTH = 30;
+	final int KNIGHTHEIGHT = 70;
 	int currentState = MENU;
 	Font titleFont;
 	Font tiitleFont;
 	Font tiiitleFont;
 	Font EndFont;
 	Timer frameDraw;
+	int stage = 0;
+	int groundHeight = Medieval_Mayhem.HEIGHT * 2 / 3;
+	Knight knight;
+	ObjectManager objectManager;
+	int knightX = 0;
+	int knightY = groundHeight - KNIGHTHEIGHT;
 	GamePanel(){
 		titleFont = new Font("Arial", Font.PLAIN, 44);
 		tiitleFont = new Font("Arial", Font.PLAIN, 15);
@@ -45,7 +53,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		frameDraw = new Timer(1000/60,this);
 		frameDraw.start();
 		loadImage ("map.jpg");
-
+		knight = new Knight(knightX,knightY,KNIGHTWIDTH,KNIGHTHEIGHT);
+		objectManager = new ObjectManager(knight);
 	}
 	@Override
 	public void paintComponent(Graphics g){
@@ -61,7 +70,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	}
 	void updateMenuState() {  }
 	void updateMapState()  {  }
-	void updateGameState() {  }
+	void updateGameState() {
+		objectManager.update();
+	}
 	void updateEndState()  {  }
 	void drawMenuState(Graphics g) { 
 		g.setColor(Color.BLUE);
@@ -92,7 +103,13 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		g.setColor(Color.YELLOW);
 		g.drawString("Stage 3", STAGE3X, STAGE3Y + STAGESIZEY / 4 * 3);
 	}
-	void drawGameState(Graphics g) {  }
+	void drawGameState(Graphics g) { 
+		g.setColor(Color.CYAN);
+		g.fillRect(0, 0,Medieval_Mayhem.WIDTH , groundHeight );
+		g.setColor(Color.GREEN);
+		g.fillRect(0, groundHeight,Medieval_Mayhem.WIDTH , Medieval_Mayhem.HEIGHT );
+		objectManager.draw(g);
+	}
 	void drawEndState(Graphics g)  {  }
 
 	@Override
@@ -170,6 +187,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		// TODO Auto-generated method stub
 		if (mapClicked(e,STAGE1X,STAGE1X + STAGESIZEX,STAGE1Y,STAGE1Y + STAGESIZEY)) {
 			System.out.println("clicked");
+			currentState = GAME;
 		}
 		else if (mapClicked(e,STAGE2X,STAGE2X + STAGESIZEX,STAGE2Y,STAGE2Y + STAGESIZEY)) {
 			System.out.println("clicked");

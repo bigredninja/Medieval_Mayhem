@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
 
-public class Knight {
+public class Knight extends GameObject{
 	boolean UP = false;
 	boolean DOWN = false;
 	boolean LEFT = false;
@@ -14,22 +14,20 @@ public class Knight {
 	public static BufferedImage image;
 	public static boolean needImage = true;
 	public static boolean gotImage = false;	
-
-
-	//Knight(int x, int y, int width, int height) {
-		//super(x, y, width, height);
-		//speed = 10;
-		//if (needImage) {
-			//loadImage ("rocket.png");
-		//}	
-		// TODO Auto-generated constructor stub1
-	//}
+	Knight(int x, int y, int width, int height) {
+		super(x, y, width, height);
+		speed = 10;
+		if (needImage) {
+			loadImage ("rocket.png");
+		}	
+		 // 	TODO Auto-generated constructor stub1
+	}
 	void draw(Graphics g) {	
 		if (gotImage) {
 		//	g.drawImage(image, x, y, width, height, null);
 		} else {
-			g.setColor(Color.BLUE);
-			//g.fillRect(x, y, width, height);
+			g.setColor(Color.RED);
+			g.fillRect(x, y, width, height);
 		}
 	}
 	public void right() {
