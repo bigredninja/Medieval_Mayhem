@@ -18,13 +18,13 @@ public class Knight extends GameObject{
 		super(x, y, width, height);
 		speed = 10;
 		if (needImage) {
-			loadImage ("rocket.png");
+			loadImage ("Knight.png");
 		}	
 		 // 	TODO Auto-generated constructor stub1
 	}
 	void draw(Graphics g) {	
 		if (gotImage) {
-		//	g.drawImage(image, x, y, width, height, null);
+			g.drawImage(image, x, y, width, height, null);
 		} else {
 			g.setColor(Color.RED);
 			g.fillRect(x, y, width, height);
@@ -66,11 +66,11 @@ public class Knight extends GameObject{
 		if (DOWN) {
 			//down();
 		}
-		if (LEFT) {
-			//left();
+		if (LEFT = true) {
+			x-= speed;
 		}
 		if (RIGHT) {
-			right();
+			x += speed;
 		}
 	//}
 	//public Projectile getProjectile() {

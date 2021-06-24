@@ -31,8 +31,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	final int STAGE2Y = 410;
 	final int STAGE3X = 519;
 	final int STAGE3Y = 260;
-	final int KNIGHTWIDTH = 30;
-	final int KNIGHTHEIGHT = 70;
+	final int KNIGHTWIDTH = 64;
+	final int KNIGHTHEIGHT = 128;
 	int currentState = MENU;
 	Font titleFont;
 	Font tiitleFont;
@@ -131,11 +131,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		}
 		if (e.getKeyCode()==KeyEvent.VK_LEFT) {
 			System.out.println("LEFT");
-			//rocketship.LEFT = true;
+			knight.LEFT = true;
 		}
 		if (e.getKeyCode()==KeyEvent.VK_RIGHT) {
 			System.out.println("RIGHT");
-			//rocketship.RIGHT = true;
+			knight.RIGHT = true;
 		}
 		if (e.getKeyCode()==KeyEvent.VK_DOWN) {
 			System.out.println("DOWN");
