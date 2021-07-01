@@ -45,6 +45,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	ObjectManager objectManager;
 	int knightX = 0;
 	int knightY = groundHeight - KNIGHTHEIGHT;
+	int speed = 10;
 	GamePanel(){
 		titleFont = new Font("Arial", Font.PLAIN, 44);
 		tiitleFont = new Font("Arial", Font.PLAIN, 15);
@@ -180,7 +181,14 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
-
+		if (e.getKeyCode()==KeyEvent.VK_LEFT) {
+			System.out.println("LEFT");
+			knight.LEFT = false;
+		}
+		if (e.getKeyCode()==KeyEvent.VK_RIGHT) {
+			System.out.println("RIGHT");
+			knight.RIGHT = false;
+		}
 	}
 	@Override
 	public void mouseClicked(MouseEvent e) {

@@ -31,12 +31,15 @@ public class Knight extends GameObject{
 		}
 	}
 	public void right() {
-		//if (x < 450) {
-			//x+=speed;
+		if (x < 450) {
+			x+=speed;
 		}
-	//}public void left() {
-		//if (x > 0) {
-			//x-=speed;
+	}public void left() {
+		if (x > 0) {
+		x-=speed;
+		}
+	}
+	
 		//}
 	//}public void up() {
 		//if (y > 0) {
@@ -55,10 +58,10 @@ public class Knight extends GameObject{
 			} catch (Exception e) {
 
 			}
-			needImage = false;
+			needImage = false;}
 		}
 	//}
-	//void update() {
+	void update() {
 		//super.update();
 		if (UP) {
 			//up();
@@ -66,16 +69,16 @@ public class Knight extends GameObject{
 		if (DOWN) {
 			//down();
 		}
-		if (LEFT = true) {
+		if (LEFT ) {
 			x-= speed;
 		}
-		if (RIGHT) {
+		if (RIGHT ) {
 			x += speed;
 		}
-	//}
+	}
 	//public Projectile getProjectile() {
 		//return new Projectile(x+width/2, y, 10, 10);
 	} 
-}
+//}
 
 //}
