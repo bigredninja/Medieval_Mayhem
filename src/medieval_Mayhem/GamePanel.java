@@ -40,11 +40,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	Font EndFont;
 	Timer frameDraw;
 	int stage = 0;
-	int groundHeight = Medieval_Mayhem.HEIGHT * 2 / 3;
+	static int groundHeight = Medieval_Mayhem.HEIGHT * 2 / 3;
 	Knight knight;
 	ObjectManager objectManager;
-	int knightX = 0;
-	int knightY = groundHeight - KNIGHTHEIGHT;
+	int knightX = 64;
+	int knightY = groundHeight;
 	int speed = 10;
 	GamePanel(){
 		titleFont = new Font("Arial", Font.PLAIN, 44);
@@ -126,15 +126,15 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 				currentState = MAP;
 			}
 		}   
-		if (e.getKeyCode()==KeyEvent.VK_UP) {
+		if (e.getKeyCode()==KeyEvent.VK_SPACE) {
 			System.out.println("UP");
-			//rocketship.UP = true;
+			knight.UP = true;
 		}
-		if (e.getKeyCode()==KeyEvent.VK_LEFT) {
+		if (e.getKeyCode()==KeyEvent.VK_A) {
 			System.out.println("LEFT");
 			knight.LEFT = true;
 		}
-		if (e.getKeyCode()==KeyEvent.VK_RIGHT) {
+		if (e.getKeyCode()==KeyEvent.VK_D) {
 			System.out.println("RIGHT");
 			knight.RIGHT = true;
 		}
@@ -181,13 +181,17 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
-		if (e.getKeyCode()==KeyEvent.VK_LEFT) {
+		if (e.getKeyCode()==KeyEvent.VK_A) {
 			System.out.println("LEFT");
 			knight.LEFT = false;
 		}
-		if (e.getKeyCode()==KeyEvent.VK_RIGHT) {
+		if (e.getKeyCode()==KeyEvent.VK_D) {
 			System.out.println("RIGHT");
 			knight.RIGHT = false;
+		}
+		if (e.getKeyCode()==KeyEvent.VK_SPACE) {
+			System.out.println("UP");
+			knight.UP = false;
 		}
 	}
 	@Override
