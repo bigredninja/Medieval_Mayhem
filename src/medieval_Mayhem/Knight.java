@@ -7,6 +7,7 @@ import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 
 public class Knight extends GameObject{
+	int health = 3;
 	float vel = 0f;
 	float gravity = -3f;
 	int jumpPower = 35;
@@ -66,7 +67,7 @@ public class Knight extends GameObject{
 	}
 	//}
 	void update() {
-		//super.update();
+		super.update();
 		if (UP) {
 			if (GROUNDED) {
 				vel = jumpPower;

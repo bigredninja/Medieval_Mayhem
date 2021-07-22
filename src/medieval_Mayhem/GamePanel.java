@@ -39,6 +39,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	Font tiiitleFont;
 	Font EndFont;
 	Timer frameDraw;
+	Timer barbSpawn;
 	int stage = 0;
 	static int groundHeight = Medieval_Mayhem.HEIGHT * 2 / 3;
 	Knight knight;
@@ -46,6 +47,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	int knightX = 64;
 	int knightY = groundHeight;
 	int speed = 10;
+	void startGame() {
+		barbSpawn = new Timer(1000 , objectManager);
+		barbSpawn.start();
+	}
 	GamePanel(){
 		titleFont = new Font("Arial", Font.PLAIN, 44);
 		tiitleFont = new Font("Arial", Font.PLAIN, 15);
@@ -73,6 +78,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	void updateMapState()  {  }
 	void updateGameState() {
 		objectManager.update();
+		if (knight.isActive == false) {
+			currentState = END;
+		}
 	}
 	void updateEndState()  {  }
 	void drawMenuState(Graphics g) { 
@@ -200,6 +208,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		if (mapClicked(e,STAGE1X,STAGE1X + STAGESIZEX,STAGE1Y,STAGE1Y + STAGESIZEY)) {
 			System.out.println("clicked");
 			currentState = GAME;
+			startGame();
 		}
 		else if (mapClicked(e,STAGE2X,STAGE2X + STAGESIZEX,STAGE2Y,STAGE2Y + STAGESIZEY)) {
 			System.out.println("clicked");
@@ -207,34 +216,34 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		}
 		else if (mapClicked(e,STAGE3X,STAGE3X + STAGESIZEX,STAGE3Y,STAGE3Y + STAGESIZEY)) {
 			System.out.println("clicked"); }
-			
-		} 
-		@Override
-		public void mousePressed(MouseEvent e) {
-			// TODO Auto-generated method stub
 
-		}
-		@Override
-		public void mouseReleased(MouseEvent e) {
-			// TODO Auto-generated method stub
+	} 
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
 
-		}
-		@Override
-		public void mouseEntered(MouseEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-		@Override
-		public void mouseExited(MouseEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-		boolean mapClicked(MouseEvent e,int xmin,int xmax,int ymin,int ymax) {
-			System.out.println(e.getX() + " " + e.getY());
-			if (e.getX() >= xmin + 7 && e.getX() <= xmax + 7 && e.getY() >= ymin + 30 && e.getY() <= ymax + 30) {
-				return true; 
-			}
-			return false;
-
-		}
 	}
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+	boolean mapClicked(MouseEvent e,int xmin,int xmax,int ymin,int ymax) {
+		System.out.println(e.getX() + " " + e.getY());
+		if (e.getX() >= xmin + 7 && e.getX() <= xmax + 7 && e.getY() >= ymin + 30 && e.getY() <= ymax + 30) {
+			return true; 
+		}
+		return false;
+
+	}
+}
