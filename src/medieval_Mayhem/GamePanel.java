@@ -48,7 +48,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	int knightY = groundHeight;
 	int speed = 10;
 	void startGame() {
-		barbSpawn = new Timer(1000 , objectManager);
+		barbSpawn = new Timer(2000	, objectManager);
 		barbSpawn.start();
 	}
 	GamePanel(){

@@ -7,7 +7,7 @@ import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 
 public class Knight extends GameObject{
-	int health = 3;
+	int health = 4;
 	float vel = 0f;
 	float gravity = -3f;
 	int jumpPower = 35;
@@ -21,7 +21,7 @@ public class Knight extends GameObject{
 	public static boolean gotImage = false;
 	Knight(int x, int y, int width, int height) {
 		super(x, y, width, height);
-		speed = 10;
+		speed = 15;
 		if (needImage) {
 			loadImage ("Knight.png");
 		}	

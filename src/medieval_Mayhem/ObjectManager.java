@@ -33,7 +33,7 @@ public class ObjectManager implements ActionListener{
 				barb.dir = 1;
 			}
 			else {
-				barb.dir = -1;
+				barb.dir = -1;		
 			}
 			barb.update();	
 			if (barb.x < 0) {
