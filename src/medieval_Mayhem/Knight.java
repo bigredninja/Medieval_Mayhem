@@ -8,9 +8,16 @@ import javax.imageio.ImageIO;
 
 public class Knight extends GameObject{
 	int health = 4;
+	long swordTime = 500;
+	long swordSwung;
 	float vel = 0f;
 	float gravity = -3f;
+	int swordOffsetX = 0;
+	int swordOffsetY = -70;
+	int swordwidth = 80;
+	int swordheight = 20;
 	int jumpPower = 35;
+	GameObject sword;
 	boolean UP = false;
 	boolean DOWN = false;
 	boolean LEFT = false;
@@ -25,6 +32,8 @@ public class Knight extends GameObject{
 		if (needImage) {
 			loadImage ("Knight.png");
 		}	
+		sword = new GameObject( x + swordOffsetX, y +swordOffsetY,swordwidth,swordheight);
+		sword.isActive = false;
 		// 	TODO Auto-generated constructor stub1
 	}
 	void draw(Graphics g) {	
@@ -33,6 +42,10 @@ public class Knight extends GameObject{
 		} else {
 			g.setColor(Color.RED);
 			g.fillRect(x, y, width, height);
+		}
+		if (sword.isActive) {
+			g.setColor(Color.GRAY);
+			g.fillRect(sword.x,sword.y, swordwidth, swordheight);
 		}
 	}
 	public void right() {
@@ -91,6 +104,17 @@ public class Knight extends GameObject{
 			vel = 0f;
 			GROUNDED = true;
 		}
+		sword.x = x + swordOffsetX;
+		sword.y = y + swordOffsetY;
+		sword.update();
+		if (swordSwung + swordTime < System.currentTimeMillis()) {
+			sword.isActive = false;
+		}
+	}
+	void attack() {
+		sword.isActive = true;
+		swordSwung = System.currentTimeMillis();
+		System.out.println("attacked");
 	}
 	//public Projectile getProjectile() {
 	//return new Projectile(x+width/2, y, 10, 10);

@@ -205,18 +205,28 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		if (mapClicked(e,STAGE1X,STAGE1X + STAGESIZEX,STAGE1Y,STAGE1Y + STAGESIZEY)) {
-			System.out.println("clicked");
-			currentState = GAME;
-			startGame();
-		}
-		else if (mapClicked(e,STAGE2X,STAGE2X + STAGESIZEX,STAGE2Y,STAGE2Y + STAGESIZEY)) {
-			System.out.println("clicked");
+		if (currentState == MAP) {
 
-		}
-		else if (mapClicked(e,STAGE3X,STAGE3X + STAGESIZEX,STAGE3Y,STAGE3Y + STAGESIZEY)) {
-			System.out.println("clicked"); }
 
+			if (mapClicked(e,STAGE1X,STAGE1X + STAGESIZEX,STAGE1Y,STAGE1Y + STAGESIZEY)) {
+				System.out.println("clicked");
+				currentState = GAME;
+				startGame();
+			}
+			else if (mapClicked(e,STAGE2X,STAGE2X + STAGESIZEX,STAGE2Y,STAGE2Y + STAGESIZEY)) {
+				System.out.println("clicked");
+				currentState = GAME;
+				startGame();
+			}
+			else if (mapClicked(e,STAGE3X,STAGE3X + STAGESIZEX,STAGE3Y,STAGE3Y + STAGESIZEY)) {
+				System.out.println("clicked"); 
+				currentState = GAME;
+				startGame();
+			}
+		}
+		else if (currentState == GAME) {
+			knight.attack();
+		}
 	} 
 	@Override
 	public void mousePressed(MouseEvent e) {
