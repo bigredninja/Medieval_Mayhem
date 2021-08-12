@@ -14,10 +14,10 @@ public class Medieval_Mayhem {
 	void setup(){
 		frame.add(panel);
 		frame.setSize(WIDTH, HEIGHT);
-		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.addKeyListener(panel);
 		frame.addMouseListener(panel);
+		frame.setVisible(true);
 	}
 	
 	public static void main(String[] args) {

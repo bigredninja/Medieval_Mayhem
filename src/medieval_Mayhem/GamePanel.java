@@ -205,6 +205,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
+		
+	} 
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
 		if (currentState == MAP) {
 
 
@@ -227,16 +232,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		else if (currentState == GAME) {
 			knight.attack();
 		}
-	} 
-	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-
 	}
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
-
+		
 	}
 	@Override
 	public void mouseEntered(MouseEvent e) {

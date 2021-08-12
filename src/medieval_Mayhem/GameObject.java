@@ -18,10 +18,10 @@ public class GameObject {
 		this.height = height;
 		speed = 0;	
 		isActive = true;
-		collisionBox = new Rectangle(x,y,width,height);
+		collisionBox = new Rectangle(x - width / 2,y - height,width,height);
 	}
 	void update() {
-		 collisionBox.setBounds(x, y, width, height); 
+		 collisionBox.setBounds(x - width/ 2, y - height, width, height); 
 
 	}
 	BufferedImage Flip (BufferedImage image) {

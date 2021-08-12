@@ -12,8 +12,8 @@ public class Knight extends GameObject{
 	long swordSwung;
 	float vel = 0f;
 	float gravity = -3f;
-	int swordOffsetX = 0;
-	int swordOffsetY = -70;
+	int swordOffsetX = 40;
+	int swordOffsetY = -40;
 	int swordwidth = 80;
 	int swordheight = 20;
 	int jumpPower = 35;
@@ -23,6 +23,7 @@ public class Knight extends GameObject{
 	boolean LEFT = false;
 	boolean RIGHT = false;
 	boolean GROUNDED = true;
+	boolean attacking = false;
 	public static BufferedImage image;
 	public static boolean needImage = true;
 	public static boolean gotImage = false;
@@ -45,7 +46,7 @@ public class Knight extends GameObject{
 		}
 		if (sword.isActive) {
 			g.setColor(Color.GRAY);
-			g.fillRect(sword.x,sword.y, swordwidth, swordheight);
+			g.fillRect(sword.x - swordwidth / 2,sword.y - swordheight, swordwidth, swordheight);
 		}
 	}
 	public void right() {
@@ -103,6 +104,10 @@ public class Knight extends GameObject{
 			y = GamePanel.groundHeight;
 			vel = 0f;
 			GROUNDED = true;
+		}
+		if (attacking) {
+			attack();
+			attacking = false;
 		}
 		sword.x = x + swordOffsetX;
 		sword.y = y + swordOffsetY;
