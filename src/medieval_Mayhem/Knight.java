@@ -17,6 +17,7 @@ public class Knight extends GameObject{
 	int swordwidth = 80;
 	int swordheight = 20;
 	int jumpPower = 35;
+	int dir = 1;
 	GameObject sword;
 	boolean UP = false;
 	boolean DOWN = false;
@@ -25,6 +26,7 @@ public class Knight extends GameObject{
 	boolean GROUNDED = true;
 	boolean attacking = false;
 	public static BufferedImage image;
+	public static BufferedImage imageflipped;
 	public static boolean needImage = true;
 	public static boolean gotImage = false;
 	Knight(int x, int y, int width, int height) {
@@ -32,6 +34,7 @@ public class Knight extends GameObject{
 		speed = 15;
 		if (needImage) {
 			loadImage ("Knight.png");
+			imageflipped = Flip(image);
 		}	
 		sword = new GameObject( x + swordOffsetX, y +swordOffsetY,swordwidth,swordheight);
 		sword.isActive = false;
@@ -39,7 +42,7 @@ public class Knight extends GameObject{
 	}
 	void draw(Graphics g) {	
 		if (gotImage) {
-			g.drawImage(image, x - width / 2, y - height, width, height, null);
+			g.drawImage(dir == 1 ? image : imageflipped, x - width / 2, y - height, width, height, null);
 		} else {
 			g.setColor(Color.RED);
 			g.fillRect(x, y, width, height);
@@ -94,9 +97,11 @@ public class Knight extends GameObject{
 		}
 		if (LEFT ) {
 			x-= speed;
+			dir = -1;
 		}
 		if (RIGHT ) {
 			x += speed;
+			dir = 1; 
 		}
 		vel += gravity;
 		y -= (int)vel;
@@ -109,7 +114,7 @@ public class Knight extends GameObject{
 			attack();
 			attacking = false;
 		}
-		sword.x = x + swordOffsetX;
+		sword.x = x + (dir == 1 ? swordOffsetX : -swordOffsetX;
 		sword.y = y + swordOffsetY;
 		sword.update();
 		if (swordSwung + swordTime < System.currentTimeMillis()) {

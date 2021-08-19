@@ -231,7 +231,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		}
 		else if (currentState == GAME) {
 			knight.attack();
-		}
+		} 
 	}
 	@Override
 	public void mouseReleased(MouseEvent e) {
