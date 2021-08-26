@@ -12,10 +12,12 @@ public class Knight extends GameObject{
 	long swordSwung;
 	float vel = 0f;
 	float gravity = -3f;
-	int swordOffsetX = 40;
+	int swordOffsetX = 60;
 	int swordOffsetY = -40;
 	int swordwidth = 80;
 	int swordheight = 20;
+	int iswordOffsetX = 5;
+	int iswordOffsetY = -13;
 	int jumpPower = 35;
 	int dir = 1;
 	GameObject sword;
@@ -27,6 +29,10 @@ public class Knight extends GameObject{
 	boolean attacking = false;
 	public static BufferedImage image;
 	public static BufferedImage imageflipped;
+	public static BufferedImage swordimage;
+	public static BufferedImage swordflipped;
+	public static BufferedImage image2;
+	public static BufferedImage image2flipped;
 	public static boolean needImage = true;
 	public static boolean gotImage = false;
 	Knight(int x, int y, int width, int height) {
@@ -35,22 +41,27 @@ public class Knight extends GameObject{
 		if (needImage) {
 			loadImage ("Knight.png");
 			imageflipped = Flip(image);
+			loadImage2 ("Sword.png");
+			swordflipped = Flip(swordimage);
+			loadImage3 ("Knight2.png");
+			image2flipped = Flip(image2);
 		}	
+		
 		sword = new GameObject( x + swordOffsetX, y +swordOffsetY,swordwidth,swordheight);
 		sword.isActive = false;
 		// 	TODO Auto-generated constructor stub1
 	}
 	void draw(Graphics g) {	
-		if (gotImage) {
-			g.drawImage(dir == 1 ? image : imageflipped, x - width / 2, y - height, width, height, null);
-		} else {
-			g.setColor(Color.RED);
-			g.fillRect(x, y, width, height);
-		}
 		if (sword.isActive) {
-			g.setColor(Color.GRAY);
-			g.fillRect(sword.x - swordwidth / 2,sword.y - swordheight, swordwidth, swordheight);
+			g.drawImage(dir == 1 ? image2 : image2flipped, x - width / 2, y - height, width, height, null);
+			
+		}else {
+			g.drawImage(dir == 1 ? image : imageflipped, x - width / 2, y - height, width, height, null);
 		}
+			g.drawImage(dir == 1 ? swordimage : swordflipped, sword.x - sword.width / 2, sword.y - sword.height, sword.width, sword.height, null);
+			//g.setColor(Color.GRAY);
+			//g.fillRect(sword.x - swordwidth / 2,sword.y - swordheight, swordwidth, swordheight);
+		
 	}
 	public void right() {
 		if (x < 450) {
@@ -73,15 +84,35 @@ public class Knight extends GameObject{
 	//}
 	//}
 	void loadImage(String imageFile) {
-		if (needImage) {
+		
 			try {
 				image = ImageIO.read(this.getClass().getResourceAsStream(imageFile));
 				gotImage = true;
 			} catch (Exception e) {
 
 			}
-			needImage = false;}
+			needImage = false;
 	}
+	void loadImage2(String imageFile) {
+		
+		try {
+			swordimage = ImageIO.read(this.getClass().getResourceAsStream(imageFile));
+			gotImage = true;
+		} catch (Exception e) {
+
+		}
+		needImage = false;
+}
+	void loadImage3(String imageFile) {
+		
+		try {
+			image2 = ImageIO.read(this.getClass().getResourceAsStream(imageFile));
+			gotImage = true;
+		} catch (Exception e) {
+
+		}
+		needImage = false;
+}
 	//}
 	void update() {
 		super.update();
@@ -114,8 +145,14 @@ public class Knight extends GameObject{
 			attack();
 			attacking = false;
 		}
-		sword.x = x + (dir == 1 ? swordOffsetX : -swordOffsetX;
-		sword.y = y + swordOffsetY;
+		if (sword.isActive) {
+			sword.x = x + (dir == 1 ? swordOffsetX : -swordOffsetX);
+			sword.y = y + swordOffsetY;
+		} else {
+			sword.x = x + (dir == 1 ? iswordOffsetX : -iswordOffsetX);
+			sword.y = y + iswordOffsetY;
+		}
+		
 		sword.update();
 		if (swordSwung + swordTime < System.currentTimeMillis()) {
 			sword.isActive = false;
