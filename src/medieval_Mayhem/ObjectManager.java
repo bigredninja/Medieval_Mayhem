@@ -90,7 +90,10 @@ public class ObjectManager implements ActionListener{
 		for (Iterator<Barbarian> iterator = barbs.iterator(); iterator.hasNext();) {
 			Barbarian barb = (Barbarian) iterator.next();
 			if (knight.sword.isActive && knight.sword.collisionBox.intersects(barb.collisionBox)) {
-				barb.isActive = false;
+				barb.health--;
+				if (barb.health <= 0) {
+					barb.isActive = false;
+				}		
 				break;
 			}
 			if (knight.collisionBox.intersects(barb.collisionBox)) {
