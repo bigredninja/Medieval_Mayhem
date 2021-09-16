@@ -91,9 +91,11 @@ public class ObjectManager implements ActionListener{
 			Barbarian barb = (Barbarian) iterator.next();
 			if (knight.sword.isActive && knight.sword.collisionBox.intersects(barb.collisionBox)) {
 				barb.health--;
+				barb.velx = barb.speed * -barb.dir;
+				barb.vely = barb.speed;
 				if (barb.health <= 0) {
 					barb.isActive = false;
-					
+				
 				}		
 				break;
 			}
