@@ -93,6 +93,7 @@ public class ObjectManager implements ActionListener{
 				barb.health--;
 				if (barb.health <= 0) {
 					barb.isActive = false;
+					
 				}		
 				break;
 			}

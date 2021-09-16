@@ -7,6 +7,7 @@ import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 
 public class Barbarian extends GameObject {
+	float velx = 0f;
 	float vely = 0f;
 	float gravity = -3f;
 	boolean GROUNDED = true;
@@ -26,8 +27,16 @@ public class Barbarian extends GameObject {
 		// TODO Auto-generated constructor stub
 	}	
 	void update() {
-		x+=speed * dir;
-		vely += gravity;
+		velx += dir;
+		if (velx > speed) {
+			velx = speed;
+		}
+		if (velx < -speed) {
+			velx = -speed;
+		}
+		x+=velx;
+		vely
+			+= gravity;
 		y -= (int)vely;
 		if (y >= GamePanel.groundHeight) {
 			y = GamePanel.groundHeight;

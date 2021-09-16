@@ -8,7 +8,7 @@ import javax.imageio.ImageIO;
 
 public class Knight extends GameObject{
 	int health = 4;
-	long swordTime = 500;
+	long swordTime = 2;
 	long swordSwung;
 	float vel = 0f;
 	float gravity = -3f;
