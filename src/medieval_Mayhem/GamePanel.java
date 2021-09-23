@@ -48,8 +48,6 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	int knightY = groundHeight;
 	int speed = 10;
 	void startGame() {
-		barbSpawn = new Timer(2000	, objectManager);
-		barbSpawn.start();
 	}
 	GamePanel(){
 		titleFont = new Font("Arial", Font.PLAIN, 44);
@@ -60,7 +58,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		frameDraw.start();
 		loadImage ("map.jpg");
 		knight = new Knight(knightX,knightY,KNIGHTWIDTH,KNIGHTHEIGHT);
-		objectManager = new ObjectManager(knight);
+		barbSpawn = new Timer(1000	, objectManager);
+		objectManager = new ObjectManager(knight,barbSpawn);
+		barbSpawn.start();
 	}
 	@Override
 	public void paintComponent(Graphics g){

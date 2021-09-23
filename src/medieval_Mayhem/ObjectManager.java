@@ -5,16 +5,20 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
+import javax.swing.Timer;
+
 
 public class ObjectManager implements ActionListener{
 	Random rnd = new Random();
 	ArrayList<Barbarian> barbs;
 	int score = 0;
 	int barbCount = 0;
-	int barbMax = 5;
+	int barbMax = 6;
+	Timer t;
 	//ArrayList<Projectile> projectiles;
 	Knight knight;
-	public ObjectManager( Knight knight) {
+	public ObjectManager( Knight knight,Timer time) {
+		t = time;
 		this.knight = knight;
 		//projectiles = new ArrayList<Projectile>();	
 		barbs = new ArrayList<Barbarian>();
@@ -22,8 +26,9 @@ public class ObjectManager implements ActionListener{
 	//public void addProjectile(Projectile projectile ) {
 		//projectiles.add(projectile);
 	//}
-	public void addBarbarian() {
-		barbs.add(new Barbarian(Medieval_Mayhem.WIDTH,GamePanel.groundHeight,64,128));
+	public void addBarbarian(int x) {
+			barbs.add(new Barbarian(x,GamePanel.groundHeight,64,128));
+		
 	}
 	void update() {
 		knight.update();
@@ -36,10 +41,7 @@ public class ObjectManager implements ActionListener{
 				barb.dir = -1;		
 			}
 			barb.update();	
-			if (barb.x < 0) {
-				barb.isActive = false;
-			}
-
+			
 
 		}
 		/*for (Iterator iterator = projectiles.iterator(); iterator.hasNext();) {
@@ -49,6 +51,12 @@ public class ObjectManager implements ActionListener{
 				projectile.isActive = false;
 			}
 		}*/
+		
+		if (score == barbMax) {
+			barbCount = 0;
+			t.start();
+		}
+		
 		checkCollision();
 		purgeObjects();
 	}
@@ -82,8 +90,18 @@ public class ObjectManager implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if (barbCount < barbMax) {
-			addBarbarian();
-			barbCount++;
+			Random rnd = new Random();
+			for (int i = 1; i < 7; i++) {
+				if (rnd.nextBoolean()) {
+					addBarbarian(500 * i);
+				}
+				else {
+					addBarbarian(-500 * i);
+				}
+	//			addBarbarian(-100);
+				barbCount++;
+			}
+			((Timer)e.getSource()).stop();
 		}
 	}
 	void checkCollision() {
@@ -95,7 +113,7 @@ public class ObjectManager implements ActionListener{
 				barb.vely = barb.speed;
 				if (barb.health <= 0) {
 					barb.isActive = false;
-				
+					score++;
 				}		
 				break;
 			}
