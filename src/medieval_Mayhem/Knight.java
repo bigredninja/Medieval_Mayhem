@@ -8,7 +8,8 @@ import javax.imageio.ImageIO;
 
 public class Knight extends GameObject{
 	int health = 4;
-	long swordTime = 250;
+	int healthMax = 4;
+	long swordTime = 150;
 	long swordSwung;
 	float vel = 0f;
 	float gravity = -3f;
@@ -128,11 +129,15 @@ public class Knight extends GameObject{
 		}
 		if (LEFT ) {
 			x-= speed;
-			dir = -1;
+			if (!sword.isActive) {
+				dir = -1;
+			}
 		}
 		if (RIGHT ) {
 			x += speed;
-			dir = 1; 
+			if (!sword.isActive) {
+				dir = 1; 
+			}
 		}
 		vel += gravity;
 		y -= (int)vel;

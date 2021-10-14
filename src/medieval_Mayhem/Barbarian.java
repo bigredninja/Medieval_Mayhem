@@ -11,6 +11,9 @@ public class Barbarian extends GameObject {
 	float vely = 0f;
 	float gravity = -3f;
 	boolean GROUNDED = true;
+	boolean invince = false;
+	long invinceStart = 0;
+	long invinceTime = 500;
 	public static BufferedImage imageflipped;
 	public static BufferedImage image;
 	public static boolean needImage = true;
@@ -43,6 +46,9 @@ public class Barbarian extends GameObject {
 			vely = 0f;
 			GROUNDED = true;
 		}
+		if (System.currentTimeMillis() > invinceStart + invinceTime) {
+			invince = false;
+		}
 		super.update();
 	}
 	void draw(Graphics g) {
@@ -57,7 +63,7 @@ public class Barbarian extends GameObject {
 		if (needImage) {
 			try {
 				image = ImageIO.read(this.getClass().getResourceAsStream(imageFile));
-				gotImage = true;
+				gotImage = true; 
 			} catch (Exception e) {
 
 			}

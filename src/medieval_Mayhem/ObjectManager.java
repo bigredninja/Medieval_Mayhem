@@ -14,14 +14,14 @@ public class ObjectManager implements ActionListener{
 	int score = 0;
 	int barbCount = 0;
 	int barbMax = 6;
-	Timer t;
 	//ArrayList<Projectile> projectiles;
 	Knight knight;
-	public ObjectManager( Knight knight,Timer time) {
-		t = time;
+	Timer spawn;
+	public ObjectManager(Knight knight) {
 		this.knight = knight;
 		//projectiles = new ArrayList<Projectile>();	
 		barbs = new ArrayList<Barbarian>();
+		spawn = new Timer(1000, this);
 	}
 	//public void addProjectile(Projectile projectile ) {
 		//projectiles.add(projectile);
@@ -53,8 +53,7 @@ public class ObjectManager implements ActionListener{
 		}*/
 		
 		if (score == barbMax) {
-			barbCount = 0;
-			t.start();
+			//barbCount = 0;
 		}
 		
 		checkCollision();
@@ -91,26 +90,27 @@ public class ObjectManager implements ActionListener{
 		// TODO Auto-generated method stub
 		if (barbCount < barbMax) {
 			Random rnd = new Random();
-			for (int i = 1; i < 7; i++) {
 				if (rnd.nextBoolean()) {
-					addBarbarian(500 * i);
+					addBarbarian(1200);
 				}
 				else {
-					addBarbarian(-500 * i);
+					addBarbarian(0);
 				}
 	//			addBarbarian(-100);
 				barbCount++;
-			}
-			((Timer)e.getSource()).stop();
+		} else {
+			//((Timer)e.getSource()).stop();
 		}
 	}
 	void checkCollision() {
 		for (Iterator<Barbarian> iterator = barbs.iterator(); iterator.hasNext();) {
 			Barbarian barb = (Barbarian) iterator.next();
-			if (knight.sword.isActive && knight.sword.collisionBox.intersects(barb.collisionBox)) {
+			if (!barb.invince && knight.sword.isActive && knight.sword.collisionBox.intersects(barb.collisionBox)) {
 				barb.health--;
 				barb.velx = barb.speed * -barb.dir;
 				barb.vely = barb.speed;
+				barb.invince = true;
+				barb.invinceStart = System.currentTimeMillis();
 				if (barb.health <= 0) {
 					barb.isActive = false;
 					score++;

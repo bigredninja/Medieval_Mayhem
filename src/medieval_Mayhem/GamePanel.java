@@ -38,16 +38,20 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	Font tiitleFont;
 	Font tiiitleFont;
 	Font EndFont;
+	String string;
 	Timer frameDraw;
-	Timer barbSpawn;
 	int stage = 0;
 	static int groundHeight = Medieval_Mayhem.HEIGHT * 2 / 3;
 	Knight knight;
 	ObjectManager objectManager;
-	int knightX = 64;
+	int knightX = 600;
 	int knightY = groundHeight;
 	int speed = 10;
 	void startGame() {
+		objectManager.spawn.start();
+		objectManager.barbCount = 0;
+		knight.health = knight.healthMax;
+		knight.isActive = true;
 	}
 	GamePanel(){
 		titleFont = new Font("Arial", Font.PLAIN, 44);
@@ -58,9 +62,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		frameDraw.start();
 		loadImage ("map.jpg");
 		knight = new Knight(knightX,knightY,KNIGHTWIDTH,KNIGHTHEIGHT);
-		barbSpawn = new Timer(1000	, objectManager);
-		objectManager = new ObjectManager(knight,barbSpawn);
-		barbSpawn.start();
+		objectManager = new ObjectManager(knight);
 	}
 	@Override
 	public void paintComponent(Graphics g){
@@ -81,11 +83,20 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		if (knight.isActive == false) {
 			currentState = END;
 		}
+		if (objectManager.barbs.size() == 0 && objectManager.barbCount == objectManager.barbMax) {
+			currentState = MAP;
+			objectManager.spawn.stop(); 
+		}
 	}
 	void updateEndState()  {  }
 	void drawMenuState(Graphics g) { 
 		g.setColor(Color.BLUE);
 		g.fillRect(0, 0, Medieval_Mayhem.WIDTH, Medieval_Mayhem.HEIGHT);
+		g.setFont(titleFont);
+		g.setColor(Color.YELLOW);
+		string = "Click M1 to go to Map then select your stage";
+		int width = g.getFontMetrics().stringWidth(string);
+		g.drawString(string, Medieval_Mayhem.WIDTH/2 - width/2, Medieval_Mayhem.HEIGHT/2);
 	}
 	void drawMapState(Graphics g)  { 
 		if (gotImage) {
@@ -216,21 +227,29 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 			if (mapClicked(e,STAGE1X,STAGE1X + STAGESIZEX,STAGE1Y,STAGE1Y + STAGESIZEY)) {
 				System.out.println("clicked");
 				currentState = GAME;
+				objectManager.barbMax = 6;
 				startGame();
 			}
 			else if (mapClicked(e,STAGE2X,STAGE2X + STAGESIZEX,STAGE2Y,STAGE2Y + STAGESIZEY)) {
 				System.out.println("clicked");
 				currentState = GAME;
+				objectManager.barbMax = 12;
 				startGame();
 			}
 			else if (mapClicked(e,STAGE3X,STAGE3X + STAGESIZEX,STAGE3Y,STAGE3Y + STAGESIZEY)) {
 				System.out.println("clicked"); 
 				currentState = GAME;
+				objectManager.barbMax = 18;
 				startGame();
 			}
 		}
 		else if (currentState == GAME) {
 			knight.attack();
+		} 
+		else if (currentState == MENU) {
+			currentState = MAP;
+		} else if (currentState == END) {
+			currentState = MENU;
 		} 
 	}
 	@Override
