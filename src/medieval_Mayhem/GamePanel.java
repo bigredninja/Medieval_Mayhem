@@ -47,6 +47,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	int knightX = 600;
 	int knightY = groundHeight;
 	int speed = 10;
+	public static BufferedImage heart_Health;
 	void startGame() {
 		objectManager.spawn.start();
 		objectManager.barbCount = 0;
@@ -63,6 +64,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		loadImage ("map.jpg");
 		knight = new Knight(knightX,knightY,KNIGHTWIDTH,KNIGHTHEIGHT);
 		objectManager = new ObjectManager(knight);
+		if (needImage) {
+			loadImage("Heart health.png");
+		}
 	}
 	@Override
 	public void paintComponent(Graphics g){
@@ -128,7 +132,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		g.fillRect(0, 0,Medieval_Mayhem.WIDTH , groundHeight );
 		g.setColor(Color.GREEN);
 		g.fillRect(0, groundHeight,Medieval_Mayhem.WIDTH , Medieval_Mayhem.HEIGHT );
-		objectManager.draw(g);
+		objectManager.draw(g);	
 	}
 	void drawEndState(Graphics g)  {  }
 

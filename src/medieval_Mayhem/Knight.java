@@ -46,6 +46,7 @@ public class Knight extends GameObject{
 			swordflipped = Flip(swordimage);
 			loadImage3 ("Knight2.png");
 			image2flipped = Flip(image2);
+			
 		}	
 		
 		sword = new GameObject( x + swordOffsetX, y +swordOffsetY,swordwidth,swordheight);
@@ -114,6 +115,7 @@ public class Knight extends GameObject{
 		}
 		needImage = false;
 }
+	
 	//}
 	void update() {
 		super.update();
