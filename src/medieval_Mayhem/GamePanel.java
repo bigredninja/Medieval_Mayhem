@@ -10,6 +10,7 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
+import java.util.Iterator;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
@@ -19,6 +20,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	public static BufferedImage image;
 	public static boolean needImage = true;
 	public static boolean gotImage = false;
+	public static BufferedImage heart_Health;
 	final int MENU = 0;
 	final int MAP = 1;
 	final int GAME = 2;
@@ -47,7 +49,6 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	int knightX = 600;
 	int knightY = groundHeight;
 	int speed = 10;
-	public static BufferedImage heart_Health;
 	void startGame() {
 		objectManager.spawn.start();
 		objectManager.barbCount = 0;
@@ -64,9 +65,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		loadImage ("map.jpg");
 		knight = new Knight(knightX,knightY,KNIGHTWIDTH,KNIGHTHEIGHT);
 		objectManager = new ObjectManager(knight);
-		if (needImage) {
-			loadImage("Heart health.png");
-		}
+		loadheartImage("Hearthealth.png");
 	}
 	@Override
 	public void paintComponent(Graphics g){
@@ -103,12 +102,12 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		g.drawString(string, Medieval_Mayhem.WIDTH/2 - width/2, Medieval_Mayhem.HEIGHT/2);
 	}
 	void drawMapState(Graphics g)  { 
-		if (gotImage) {
+		//if (gotImage) {
 			g.drawImage(image, 0, 0, Medieval_Mayhem.WIDTH, Medieval_Mayhem.HEIGHT, null);
-		} else {
-			g.setColor(Color.BLACK);
-			g.fillRect(0, 0, Medieval_Mayhem.WIDTH, Medieval_Mayhem.HEIGHT);
-		}
+		//} else {
+		//	g.setColor(Color.BLACK);
+		//	g.fillRect(0, 0, Medieval_Mayhem.WIDTH, Medieval_Mayhem.HEIGHT);
+	//	}
 		g.setColor(Color.RED);
 		g.drawRect(STAGE1X, STAGE1Y, STAGESIZEX, STAGESIZEY);
 		g.setFont(titleFont);
@@ -132,9 +131,23 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		g.fillRect(0, 0,Medieval_Mayhem.WIDTH , groundHeight );
 		g.setColor(Color.GREEN);
 		g.fillRect(0, groundHeight,Medieval_Mayhem.WIDTH , Medieval_Mayhem.HEIGHT );
-		objectManager.draw(g);	
+		objectManager.draw(g);
+		for (int j = 0; j < knight.health; j++) {
+			int hx = 950 + (j * 40);
+			g.drawImage(heart_Health, hx, 15, 60, 60, null);
+			
+		}
 	}
-	void drawEndState(Graphics g)  {  }
+	void drawEndState(Graphics g)  { 
+		g.setColor(Color.RED);
+		g.fillRect(0, 0, Medieval_Mayhem.WIDTH, Medieval_Mayhem.HEIGHT);
+		g.setFont(titleFont);
+		g.setColor(Color.YELLOW);
+		string = "Click M1 to go to menu";
+		int width = g.getFontMetrics().stringWidth(string);
+		g.drawString(string, Medieval_Mayhem.WIDTH/2 - width/2, Medieval_Mayhem.HEIGHT/2);
+	}
+	
 
 	@Override
 	public void keyPressed(KeyEvent e) {
@@ -171,17 +184,21 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	}
 
 	void loadImage(String imageFile) {
-		if (needImage) {
 			try {
 				image = ImageIO.read(this.getClass().getResourceAsStream(imageFile));
-				gotImage = true;
 				System.out.println("Its working");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			needImage = false;
-		}
 	}
+	void loadheartImage(String imageFile) {
+		try {
+			heart_Health = ImageIO.read(this.getClass().getResourceAsStream(imageFile));
+			System.out.println("Its working");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+}
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
