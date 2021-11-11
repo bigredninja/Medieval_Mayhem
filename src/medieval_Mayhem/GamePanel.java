@@ -99,7 +99,33 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		g.setColor(Color.YELLOW);
 		string = "Click M1 to go to Map then select your stage";
 		int width = g.getFontMetrics().stringWidth(string);
-		g.drawString(string, Medieval_Mayhem.WIDTH/2 - width/2, Medieval_Mayhem.HEIGHT/2);
+		g.drawString(string, Medieval_Mayhem.WIDTH/2 - width/2, Medieval_Mayhem.HEIGHT/2 - 100);
+		g.setFont(titleFont);
+		g.setColor(Color.YELLOW);
+		string = "Instructions:";
+		int width1 = g.getFontMetrics().stringWidth(string);
+		g.drawString(string, Medieval_Mayhem.WIDTH/2 - width1/2, Medieval_Mayhem.HEIGHT/2);
+		g.setFont(titleFont);
+		g.setColor(Color.GREEN);
+		string = "D = Move Right";
+		int width11 = g.getFontMetrics().stringWidth(string);
+		g.drawString(string, Medieval_Mayhem.WIDTH/2 - width11/2, Medieval_Mayhem.HEIGHT/2 + 50);
+		g.setFont(titleFont);
+		g.setColor(Color.GREEN);
+		string = "A = Move Left";
+		int width111 = g.getFontMetrics().stringWidth(string);
+		g.drawString(string, Medieval_Mayhem.WIDTH/2 - width111/2, Medieval_Mayhem.HEIGHT/2 + 100);
+		g.setFont(titleFont);
+		g.setColor(Color.GREEN);
+		string = "Space = Jump";
+		int width1111 = g.getFontMetrics().stringWidth(string);
+		g.drawString(string, Medieval_Mayhem.WIDTH/2 - width1111/2, Medieval_Mayhem.HEIGHT/2 + 150);
+		g.setFont(titleFont);
+		g.setColor(Color.GREEN);
+		string = "M1 = Attack";
+		int width11111 = g.getFontMetrics().stringWidth(string);
+		g.drawString(string, Medieval_Mayhem.WIDTH/2 - width1/2, Medieval_Mayhem.HEIGHT/2+ 200);
+
 	}
 	void drawMapState(Graphics g)  { 
 		//if (gotImage) {
@@ -146,6 +172,16 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		string = "Click M1 to go to menu";
 		int width = g.getFontMetrics().stringWidth(string);
 		g.drawString(string, Medieval_Mayhem.WIDTH/2 - width/2, Medieval_Mayhem.HEIGHT/2);
+		g.setFont(titleFont);
+		g.setColor(Color.YELLOW);
+		string = "GAME OVER";
+		int width1 = g.getFontMetrics().stringWidth(string);
+		g.drawString(string, Medieval_Mayhem.WIDTH/2 - width1/2, Medieval_Mayhem.HEIGHT/3);
+		g.setFont(titleFont);
+		g.setColor(Color.YELLOW);
+		string = "Score: " + objectManager.score;
+		int width2 = g.getFontMetrics().stringWidth(string);
+		g.drawString(string, Medieval_Mayhem.WIDTH/2 + 50 - width1/2, Medieval_Mayhem.HEIGHT/2 + 100);
 	}
 	
 
