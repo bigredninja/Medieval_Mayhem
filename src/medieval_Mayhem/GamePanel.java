@@ -66,7 +66,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		knight = new Knight(knightX,knightY,KNIGHTWIDTH,KNIGHTHEIGHT);
 		objectManager = new ObjectManager(knight);
 		loadheartImage("Hearthealth.png");
-	}
+	}  //=)
 	@Override
 	public void paintComponent(Graphics g){
 		if(currentState == MENU){
@@ -97,7 +97,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		g.fillRect(0, 0, Medieval_Mayhem.WIDTH, Medieval_Mayhem.HEIGHT);
 		g.setFont(titleFont);
 		g.setColor(Color.YELLOW);
-		string = "Click M1 to go to Map then select your stage";
+		string = "Click space to go to Map then select your stage";
 		int width = g.getFontMetrics().stringWidth(string);
 		g.drawString(string, Medieval_Mayhem.WIDTH/2 - width/2, Medieval_Mayhem.HEIGHT/2 - 100);
 		g.setFont(titleFont);
@@ -194,7 +194,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 			if (currentState == END) {
 				currentState = MENU;
 			} 
-			else if (currentState == MENU) {
+			
+			else if (e.getKeyCode()==KeyEvent.VK_SPACE) {
+			 if(currentState == MENU) 
 				currentState = MAP;
 			}
 		}   
@@ -285,18 +287,24 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 				System.out.println("clicked");
 				currentState = GAME;
 				objectManager.barbMax = 6;
+				objectManager.barbSpeed = 10;
+				objectManager.barbHealth = 2;
 				startGame();
 			}
 			else if (mapClicked(e,STAGE2X,STAGE2X + STAGESIZEX,STAGE2Y,STAGE2Y + STAGESIZEY)) {
 				System.out.println("clicked");
 				currentState = GAME;
 				objectManager.barbMax = 12;
+				objectManager.barbSpeed = 12;
+				objectManager.barbHealth = 2;
 				startGame();
 			}
 			else if (mapClicked(e,STAGE3X,STAGE3X + STAGESIZEX,STAGE3Y,STAGE3Y + STAGESIZEY)) {
 				System.out.println("clicked"); 
 				currentState = GAME;
 				objectManager.barbMax = 18;
+				objectManager.barbSpeed = 12;
+				objectManager.barbHealth = 3;
 				startGame();
 			}
 		}

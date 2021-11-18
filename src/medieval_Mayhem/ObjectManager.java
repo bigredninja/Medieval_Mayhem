@@ -14,6 +14,8 @@ public class ObjectManager implements ActionListener{
 	int score = 0;
 	int barbCount = 0;
 	int barbMax = 6;
+	int barbHealth = 2;
+	int barbSpeed = 10;
 	//ArrayList<Projectile> projectiles;
 	Knight knight;
 	Timer spawn;
@@ -27,7 +29,10 @@ public class ObjectManager implements ActionListener{
 		//projectiles.add(projectile);
 	//}
 	public void addBarbarian(int x) {
-			barbs.add(new Barbarian(x,GamePanel.groundHeight,64,128));
+			Barbarian barb = new Barbarian(x,GamePanel.groundHeight,64,128);
+			barb.speed = barbSpeed;
+			barb.health = barbHealth;
+			barbs.add(barb);
 		
 	}
 	void update() {
