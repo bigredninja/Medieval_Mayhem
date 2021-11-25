@@ -43,6 +43,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	String string;
 	Timer frameDraw;
 	int stage = 0;
+	int highestStage = 0;
 	static int groundHeight = Medieval_Mayhem.HEIGHT * 2 / 3;
 	Knight knight;
 	ObjectManager objectManager;
@@ -88,6 +89,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		}
 		if (objectManager.barbs.size() == 0 && objectManager.barbCount == objectManager.barbMax) {
 			currentState = MAP;
+			highestStage = stage > highestStage ? stage : highestStage;
 			objectManager.spawn.stop(); 
 		}
 	}
@@ -128,6 +130,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 
 	}
 	void drawMapState(Graphics g)  { 
+		Color c;
 		//if (gotImage) {
 			g.drawImage(image, 0, 0, Medieval_Mayhem.WIDTH, Medieval_Mayhem.HEIGHT, null);
 		//} else {
@@ -143,13 +146,15 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		g.setColor(Color.RED);
 		g.drawRect(STAGE2X, STAGE2Y, STAGESIZEX, STAGESIZEY);
 		g.setFont(titleFont);
-		g.setColor(Color.YELLOW);
+		c = (highestStage >= 1) ? Color.YELLOW : Color.GRAY;
+		g.setColor(c);
 		g.drawString("Stage 2", STAGE2X, STAGE2Y + STAGESIZEY / 4 * 3);
 
 		g.setColor(Color.RED);
 		g.drawRect(STAGE3X, STAGE3Y, STAGESIZEX, STAGESIZEY);
 		g.setFont(titleFont);
-		g.setColor(Color.YELLOW);
+		c = (highestStage >= 2) ? Color.YELLOW : Color.GRAY;
+		g.setColor(c);
 		g.drawString("Stage 3", STAGE3X, STAGE3Y + STAGESIZEY / 4 * 3);
 	}
 	void drawGameState(Graphics g) { 
@@ -289,22 +294,25 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 				objectManager.barbMax = 6;
 				objectManager.barbSpeed = 10;
 				objectManager.barbHealth = 2;
+				stage = 1;
 				startGame();
 			}
-			else if (mapClicked(e,STAGE2X,STAGE2X + STAGESIZEX,STAGE2Y,STAGE2Y + STAGESIZEY)) {
+			else if (mapClicked(e,STAGE2X,STAGE2X + STAGESIZEX,STAGE2Y,STAGE2Y + STAGESIZEY) && highestStage >= 1) {
 				System.out.println("clicked");
 				currentState = GAME;
 				objectManager.barbMax = 12;
 				objectManager.barbSpeed = 12;
 				objectManager.barbHealth = 2;
+				stage = 2;
 				startGame();
 			}
-			else if (mapClicked(e,STAGE3X,STAGE3X + STAGESIZEX,STAGE3Y,STAGE3Y + STAGESIZEY)) {
+			else if (mapClicked(e,STAGE3X,STAGE3X + STAGESIZEX,STAGE3Y,STAGE3Y + STAGESIZEY) && highestStage >= 2) {
 				System.out.println("clicked"); 
 				currentState = GAME;
 				objectManager.barbMax = 18;
 				objectManager.barbSpeed = 12;
 				objectManager.barbHealth = 3;
+				stage = 3;
 				startGame();
 			}
 		}
@@ -314,6 +322,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		else if (currentState == MENU) {
 			currentState = MAP;
 		} else if (currentState == END) {
+			highestStage = 0;
 			currentState = MENU;
 		} 
 	}
