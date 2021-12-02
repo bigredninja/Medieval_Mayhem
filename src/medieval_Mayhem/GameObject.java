@@ -32,4 +32,18 @@ public class GameObject {
 		op = new AffineTransformOp(tx, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
 		return op.filter(image, null);
 	}
+	BufferedImage Rotate (BufferedImage image) {
+		final double rads = Math.toRadians(90);
+		final double sin = Math.abs(Math.sin(rads));
+		final double cos = Math.abs(Math.cos(rads));
+		final int w = (int) Math.floor(image.getWidth() * cos + image.getHeight() * sin);
+		final int h = (int) Math.floor(image.getHeight() * cos + image.getWidth() * sin);
+		final AffineTransform at = new AffineTransform();
+		at.translate(w / 2, h / 2);
+		at.rotate(rads,0, 0);
+		at.translate(-image.getWidth() / 2, -image.getHeight() / 2);
+		final AffineTransformOp rotateOp = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
+		return rotateOp.filter(image,null);
+
+	}
 }

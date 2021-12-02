@@ -114,15 +114,16 @@ public class ObjectManager implements ActionListener{
 				barb.health--;
 				barb.velx = barb.speed * -barb.dir;
 				barb.vely = barb.speed;
+				barb.GROUNDED = false;
 				barb.invince = true;
 				barb.invinceStart = System.currentTimeMillis();
 				if (barb.health <= 0) {
-					barb.isActive = false;
+					barb.dead = true;
 					score++;
 				}		
 				break;
 			}
-			if (knight.collisionBox.intersects(barb.collisionBox)) {
+			if (!barb.dead && knight.collisionBox.intersects(barb.collisionBox)) {
 				knight.health--;
 				if (knight.health <= 0) {
 					knight.isActive = false;
