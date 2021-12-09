@@ -99,7 +99,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		g.fillRect(0, 0, Medieval_Mayhem.WIDTH, Medieval_Mayhem.HEIGHT);
 		g.setFont(titleFont);
 		g.setColor(Color.YELLOW);
-		string = "Click space to go to Map then select your stage";
+		string = "Press ENTER to go to Map then select your stage";
 		int width = g.getFontMetrics().stringWidth(string);
 		g.drawString(string, Medieval_Mayhem.WIDTH/2 - width/2, Medieval_Mayhem.HEIGHT/2 - 100);
 		g.setFont(titleFont);
@@ -174,7 +174,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		g.fillRect(0, 0, Medieval_Mayhem.WIDTH, Medieval_Mayhem.HEIGHT);
 		g.setFont(titleFont);
 		g.setColor(Color.YELLOW);
-		string = "Click M1 to go to menu";
+		string = "Press ENTER to go to menu";
 		int width = g.getFontMetrics().stringWidth(string);
 		g.drawString(string, Medieval_Mayhem.WIDTH/2 - width/2, Medieval_Mayhem.HEIGHT/2);
 		g.setFont(titleFont);
@@ -200,8 +200,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 				currentState = MENU;
 			} 
 			
-			else if (e.getKeyCode()==KeyEvent.VK_SPACE) {
-			 if(currentState == MENU) 
+			else if(currentState == MENU) { 
 				currentState = MAP;
 			}
 		}   
@@ -220,9 +219,6 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		if (e.getKeyCode()==KeyEvent.VK_DOWN) {
 			System.out.println("DOWN");
 			//rocketship.DOWN = true;
-		}
-		if (e.getKeyCode()==KeyEvent.VK_SPACE) {
-			//objectManager.addProjectile(rocketship.getProjectile());
 		}
 	}
 
@@ -321,9 +317,6 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		} 
 		else if (currentState == MENU) {
 			currentState = MAP;
-		} else if (currentState == END) {
-			highestStage = 0;
-			currentState = MENU;
 		} 
 	}
 	@Override

@@ -117,8 +117,12 @@ public class ObjectManager implements ActionListener{
 				barb.GROUNDED = false;
 				barb.invince = true;
 				barb.invinceStart = System.currentTimeMillis();
+				
 				if (barb.health <= 0) {
 					barb.dead = true;
+					int tmp = barb.width;
+					barb.width = barb.height;	
+					barb.height = tmp;
 					score++;
 				}		
 				break;

@@ -30,7 +30,7 @@ public class Barbarian extends GameObject {
 		if (needImage) {
 			loadImage ("Barbarian.png");
 			imageflipped = Flip(image);
-			imageDead = Rotate(image);
+			imageDead = Rotate(imageflipped);
 			imageDeadFlipped = Flip(imageDead);
 		}
 		// TODO Auto-generated constructor stub
