@@ -56,6 +56,17 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		knight.health = knight.healthMax;
 		knight.isActive = true;
 	}
+	void reset() {
+		stage = 0;
+		highestStage = 0;
+		objectManager.barbs.clear();
+		objectManager.score = 0;
+		knightX = 600;
+		knightY = groundHeight;
+		knight.vely = 0;
+		knight.velx = 0;
+		
+	}
 	GamePanel(){
 		titleFont = new Font("Arial", Font.PLAIN, 44);
 		tiitleFont = new Font("Arial", Font.PLAIN, 15);
@@ -197,6 +208,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		if (e.getKeyCode()==KeyEvent.VK_ENTER) {
 			System.out.println("enter");
 			if (currentState == END) {
+				reset();
 				currentState = MENU;
 			} 
 			

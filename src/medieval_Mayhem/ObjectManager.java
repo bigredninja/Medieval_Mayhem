@@ -128,11 +128,21 @@ public class ObjectManager implements ActionListener{
 				break;
 			}
 			if (!barb.dead && knight.collisionBox.intersects(barb.collisionBox)) {
-				knight.health--;
-				if (knight.health <= 0) {
-					knight.isActive = false;
+				if (!knight.invince) {
+					knight.health--;
+					knight.invince = true;
+					knight.invinceStart = System.currentTimeMillis();
+					knight.velx = knight.speed * barb.dir;
+					knight.vely = knight.speed;
+					knight.GROUNDED = false;				
+					if (knight.health <= 0) {
+						knight.isActive = false;
+					}
+					barb.velx = barb.speed * -barb.dir;
+					barb.vely = barb.speed;
+					barb.GROUNDED = false;
 				}
-				barb.isActive = false;
+				
 				break;
 			}
 			//for (Iterator iterator1 = projectiles.iterator(); iterator1.hasNext();) {

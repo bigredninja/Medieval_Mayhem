@@ -11,8 +11,12 @@ public class Knight extends GameObject{
 	int healthMax = 4;
 	long swordTime = 150;
 	long swordSwung;
+	long invinceStart = 0;
+	long invinceTime = 1000;
 	float vel = 0f;
 	float gravity = -3f;
+	float velx = 0f;
+	float vely = 0f;
 	int swordOffsetX = 60;
 	int swordOffsetY = -40;
 	int swordwidth = 80;
@@ -28,6 +32,7 @@ public class Knight extends GameObject{
 	boolean RIGHT = false;
 	boolean GROUNDED = true;
 	boolean attacking = false;
+	boolean invince = false;
 	public static BufferedImage image;
 	public static BufferedImage imageflipped;
 	public static BufferedImage swordimage;
@@ -121,31 +126,47 @@ public class Knight extends GameObject{
 		super.update();
 		if (UP) {
 			if (GROUNDED) {
-				vel = jumpPower;
+				vely = jumpPower;
 				UP = false;
 				GROUNDED = false;
+				
 			}
 		}
 		if (DOWN) {
 			//down();
 		}
 		if (LEFT ) {
-			x-= speed;
+			velx-= speed;
 			if (!sword.isActive) {
 				dir = -1;
 			}
 		}
 		if (RIGHT ) {
-			x += speed;
+			velx += speed;
 			if (!sword.isActive) {
 				dir = 1; 
 			}
 		}
-		vel += gravity;
-		y -= (int)vel;
+		if (!LEFT && !RIGHT) {
+			if (velx > 0) {
+				velx -= 5;
+			}
+			else if (velx < 0) {
+				velx += 5;
+			}
+		}
+		if (velx > speed) {
+			velx = speed;
+		}
+		if (velx < -speed) {
+			velx = -speed;
+		}
+		x += velx;
+		vely += gravity;
+		y -= (int)vely;
 		if (y >= GamePanel.groundHeight) {
 			y = GamePanel.groundHeight;
-			vel = 0f;
+			vely = 0f;
 			GROUNDED = true;
 		}
 		if (attacking) {
@@ -163,6 +184,9 @@ public class Knight extends GameObject{
 		sword.update();
 		if (swordSwung + swordTime < System.currentTimeMillis()) {
 			sword.isActive = false;
+		}
+		if (System.currentTimeMillis() > invinceStart + invinceTime) {
+			invince = false;
 		}
 	}
 	void attack() {
