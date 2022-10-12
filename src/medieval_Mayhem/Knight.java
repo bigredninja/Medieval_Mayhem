@@ -43,7 +43,7 @@ public class Knight extends GameObject{
 	public static boolean gotImage = false;
 	Knight(int x, int y, int width, int height) {
 		super(x, y, width, height);
-		speed = 15;
+		speed = 10;
 		if (needImage) {
 			loadImage ("Knight.png");
 			imageflipped = Flip(image);

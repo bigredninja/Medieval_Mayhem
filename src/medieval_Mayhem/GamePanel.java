@@ -300,7 +300,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 				System.out.println("clicked");
 				currentState = GAME;
 				objectManager.barbMax = 6;
-				objectManager.barbSpeed = 10;
+				objectManager.barbSpeed = 10	;
 				objectManager.barbHealth = 2;
 				stage = 1;
 				startGame();
@@ -318,7 +318,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 				System.out.println("clicked"); 
 				currentState = GAME;
 				objectManager.barbMax = 18;
-				objectManager.barbSpeed = 12;
+				objectManager.barbSpeed = 18;
 				objectManager.barbHealth = 3;
 				stage = 3;
 				startGame();
